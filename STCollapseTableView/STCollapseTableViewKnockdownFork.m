@@ -28,7 +28,7 @@
  *
  ***********************************************************************************/
 
-#import "STCollapseTableView.h"
+#import "STCollapseTableViewKnockdownFork.h"
 
 #import <objc/runtime.h>
 
