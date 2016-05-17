@@ -324,6 +324,9 @@
     NSInteger index = tap.view.tag;
     if (index >= 0)
     {
+	if ([self.delegate respondsToSelector:@selector(willToggleSection:)]) {
+	    [self.delegate willToggleSection:index];
+	}
         [self toggleSection:(NSUInteger)index animated:YES];
     }
 }

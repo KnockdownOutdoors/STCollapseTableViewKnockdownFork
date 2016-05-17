@@ -30,6 +30,12 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol STCollapseTableViewKnockdownForkDelegate <UITableViewDelegate>
+
+@optional
+-(void)willToggleSection:(NSInteger)section;
+
+@end
 /**
  *	STCollapseTableView is a UITableView subclass that automatically collapse and/or expand your sections.
  *
@@ -37,6 +43,12 @@
  *  By default all the sections are closed.
  */
 @interface STCollapseTableView : UITableView
+
+/**
+ Adding a custom delegate so the parent knows when a section will toggle
+*/
+
+@property(nonatomic,weak) id <STCollapseTableViewKnockdownForkDelegate> delegate;
 
 /**
  *	This property allow to enable/disable the exclusivity.
