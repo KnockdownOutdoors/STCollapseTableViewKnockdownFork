@@ -39,6 +39,8 @@
 @property (nonatomic, strong) NSMutableArray* sectionsStates;
 @property (nonatomic, strong) NSMutableArray<UIView*> *sectionHeaders;
 
+@property(nonatomic) float lastOffset;
+
 @end
 
 @implementation STCollapseTableView
@@ -128,17 +130,49 @@
     
     NSUInteger sectionNumber = [[self indexPathForCell:[[self visibleCells] objectAtIndex: 0]] section];
     
-    UITableViewCell *cell = [[self visibleCells] objectAtIndex:0];
-    CGRect cellFrame = cell.frame;
-    CGRect headerFrame = [_sectionHeaders objectAtIndex:sectionNumber].frame;
-    
-    float yPosition = (float)cellFrame.origin.y - ((float)headerFrame.origin.y + (float)headerFrame.size.height);
-    if (yPosition < 0) {
-        float cellAlpha = 1.0f + (yPosition / (headerFrame.size.height * 0.5));
-        cell.alpha = cellAlpha;
+    if (_lastOffset < scrollView.contentOffset.y) {
+        _lastOffset = scrollView.contentOffset.y;
+        
+        UITableViewCell *cell = nil;
+        for (UITableViewCell *thisCell in [self visibleCells]) {
+            if (thisCell.alpha != 0) {
+                cell = thisCell;
+                break;
+            }
+        }
+        CGRect cellFrame = cell.frame;
+        CGRect headerFrame = [_sectionHeaders objectAtIndex:sectionNumber].frame;
+        
+        float yPosition = (float)cellFrame.origin.y - ((float)headerFrame.origin.y + (float)headerFrame.size.height);
+        if (yPosition < 0) {
+            float cellAlpha = 1.0f + (yPosition / (headerFrame.size.height * 0.5));
+            cell.alpha = cellAlpha;
+        }
+        else
+            cell.alpha = 1.0f;
     }
-    else
-        cell.alpha = 1.0f;
+    else {
+        _lastOffset = scrollView.contentOffset.y;
+        
+        UITableViewCell *cell = nil;
+        for (UITableViewCell *thisCell in [[self visibleCells] reverseObjectEnumerator]) {
+            if (thisCell.alpha < 1.0f) {
+                cell = thisCell;
+                break;
+            }
+        }
+        CGRect cellFrame = cell.frame;
+        CGRect headerFrame = [_sectionHeaders objectAtIndex:sectionNumber].frame;
+        
+        float yPosition = (float)cellFrame.origin.y - ((float)headerFrame.origin.y + (float)headerFrame.size.height);
+        if (yPosition < 0) {
+            float cellAlpha = 1.0f + (yPosition / (headerFrame.size.height * 0.5));
+            cell.alpha = cellAlpha;
+        }
+        else
+            cell.alpha = 1.0f;
+    }
+    
 }
 
 - (void)openSection:(NSUInteger)sectionIndex animated:(BOOL)animated
