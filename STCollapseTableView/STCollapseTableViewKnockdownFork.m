@@ -140,12 +140,20 @@
                 break;
             }
         }
+        
+        if (cell == nil) {
+            return;
+        }
+        
         CGRect cellFrame = cell.frame;
         CGRect headerFrame = [_sectionHeaders objectAtIndex:sectionNumber].frame;
         
         float yPosition = (float)cellFrame.origin.y - ((float)headerFrame.origin.y + (float)headerFrame.size.height);
         if (yPosition < 0) {
             float cellAlpha = 1.0f + (yPosition / (headerFrame.size.height * 0.5));
+            if (cellAlpha < 0) {
+                cellAlpha = 0.0f;
+            }
             cell.alpha = cellAlpha;
         }
         else
@@ -161,12 +169,20 @@
                 break;
             }
         }
+        
+        if (cell == nil) {
+            return;
+        }
+        
         CGRect cellFrame = cell.frame;
         CGRect headerFrame = [_sectionHeaders objectAtIndex:sectionNumber].frame;
         
         float yPosition = (float)cellFrame.origin.y - ((float)headerFrame.origin.y + (float)headerFrame.size.height);
         if (yPosition < 0) {
             float cellAlpha = 1.0f + (yPosition / (headerFrame.size.height * 0.5));
+            if (cellAlpha < 0) {
+                cellAlpha = 0.0f;
+            }
             cell.alpha = cellAlpha;
         }
         else
