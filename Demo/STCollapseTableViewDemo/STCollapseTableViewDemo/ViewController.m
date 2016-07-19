@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 
-#import "STCollapseTableView.h"
+#import "STCollapseTableViewKnockdownFork.h"
 
 @interface ViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -43,7 +43,7 @@
 
 - (void)setupViewController
 {
-    NSArray* colors = @[[UIColor redColor],
+    NSArray* colors = @[[UIColor clearColor],
                         [UIColor orangeColor],
                         [UIColor yellowColor],
                         [UIColor greenColor],

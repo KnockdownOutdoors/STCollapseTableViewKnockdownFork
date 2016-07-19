@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		503BA6C91D3E83B100000070 /* STCollapseTableViewKnockdownFork.m in Sources */ = {isa = PBXBuildFile; fileRef = 503BA6C81D3E83B100000070 /* STCollapseTableViewKnockdownFork.m */; };
 		9A519E7C17B5006A00B5C3AD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A519E7B17B5006A00B5C3AD /* UIKit.framework */; };
 		9A519E7E17B5006A00B5C3AD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A519E7D17B5006A00B5C3AD /* Foundation.framework */; };
 		9A519E8017B5006A00B5C3AD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A519E7F17B5006A00B5C3AD /* CoreGraphics.framework */; };
@@ -18,10 +19,11 @@
 		9A519E9217B5006A00B5C3AD /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A519E9117B5006A00B5C3AD /* Default-568h@2x.png */; };
 		9A519E9517B5006A00B5C3AD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A519E9417B5006A00B5C3AD /* ViewController.m */; };
 		9A519E9817B5006A00B5C3AD /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A519E9617B5006A00B5C3AD /* ViewController.xib */; };
-		9A519EA117B5008500B5C3AD /* STCollapseTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A519EA017B5008500B5C3AD /* STCollapseTableView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		503BA6C71D3E83B100000070 /* STCollapseTableViewKnockdownFork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STCollapseTableViewKnockdownFork.h; sourceTree = "<group>"; };
+		503BA6C81D3E83B100000070 /* STCollapseTableViewKnockdownFork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STCollapseTableViewKnockdownFork.m; sourceTree = "<group>"; };
 		9A519E7817B5006A00B5C3AD /* STCollapseTableViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STCollapseTableViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A519E7B17B5006A00B5C3AD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9A519E7D17B5006A00B5C3AD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -38,8 +40,6 @@
 		9A519E9317B5006A00B5C3AD /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		9A519E9417B5006A00B5C3AD /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		9A519E9717B5006A00B5C3AD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
-		9A519E9F17B5008500B5C3AD /* STCollapseTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STCollapseTableView.h; sourceTree = "<group>"; };
-		9A519EA017B5008500B5C3AD /* STCollapseTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STCollapseTableView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,8 +114,8 @@
 		9A519E9E17B5008500B5C3AD /* STCollapseTableView */ = {
 			isa = PBXGroup;
 			children = (
-				9A519E9F17B5008500B5C3AD /* STCollapseTableView.h */,
-				9A519EA017B5008500B5C3AD /* STCollapseTableView.m */,
+				503BA6C71D3E83B100000070 /* STCollapseTableViewKnockdownFork.h */,
+				503BA6C81D3E83B100000070 /* STCollapseTableViewKnockdownFork.m */,
 			);
 			name = STCollapseTableView;
 			path = ../../STCollapseTableView;
@@ -190,7 +190,7 @@
 				9A519E8817B5006A00B5C3AD /* main.m in Sources */,
 				9A519E8C17B5006A00B5C3AD /* AppDelegate.m in Sources */,
 				9A519E9517B5006A00B5C3AD /* ViewController.m in Sources */,
-				9A519EA117B5008500B5C3AD /* STCollapseTableView.m in Sources */,
+				503BA6C91D3E83B100000070 /* STCollapseTableViewKnockdownFork.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

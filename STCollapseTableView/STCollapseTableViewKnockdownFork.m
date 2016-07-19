@@ -37,6 +37,7 @@
 @property (nonatomic, assign) id<UITableViewDataSource> collapseDataSource;
 @property (nonatomic, assign) id<UITableViewDelegate> collapseDelegate;
 @property (nonatomic, strong) NSMutableArray* sectionsStates;
+@property (nonatomic, strong) NSMutableArray<UIView*> *sectionHeaders;
 
 @end
 
@@ -121,6 +122,23 @@
     }
     
 	return [super respondsToSelector:aSelector] || [self.collapseDataSource respondsToSelector:aSelector] || [self.collapseDelegate respondsToSelector:aSelector];
+}
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    NSUInteger sectionNumber = [[self indexPathForCell:[[self visibleCells] objectAtIndex: 0]] section];
+    
+    UITableViewCell *cell = [[self visibleCells] objectAtIndex:0];
+    CGRect cellFrame = cell.frame;
+    CGRect headerFrame = [_sectionHeaders objectAtIndex:sectionNumber].frame;
+    
+    float yPosition = (float)cellFrame.origin.y - ((float)headerFrame.origin.y + (float)headerFrame.size.height);
+    if (yPosition < 0) {
+        float cellAlpha = 1.0f + (yPosition / (headerFrame.size.height));
+        cell.alpha = cellAlpha;
+    }
+    else
+        cell.alpha = 1.0f;
 }
 
 - (void)openSection:(NSUInteger)sectionIndex animated:(BOOL)animated
@@ -294,6 +312,10 @@
 {
     UIView* view = [self.collapseDelegate tableView:tableView viewForHeaderInSection:section];
     
+    if (_sectionHeaders == nil) {
+        _sectionHeaders = [[NSMutableArray alloc] init];
+    }
+    
     if (self.shouldHandleHeadersTap)
     {
         NSArray* gestures = view.gestureRecognizers;
@@ -311,6 +333,7 @@
         {
             [view setTag:section];
             [view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)]];
+            [_sectionHeaders addObject:view];
         }
     }
     
