@@ -44,17 +44,17 @@
 - (void)setupViewController
 {
     NSArray* colors = @[[UIColor clearColor],
-                        [UIColor orangeColor],
-                        [UIColor yellowColor],
-                        [UIColor greenColor],
-                        [UIColor blueColor],
-                        [UIColor purpleColor]];
+                        [UIColor clearColor],
+                        [UIColor clearColor],
+                        [UIColor clearColor],
+                        [UIColor clearColor],
+                        [UIColor clearColor]];
     
     self.data = [[NSMutableArray alloc] init];
     for (int i = 0 ; i < [colors count] ; i++)
     {
         NSMutableArray* section = [[NSMutableArray alloc] init];
-        for (int j = 0 ; j < 3 ; j++)
+        for (int j = 0 ; j < 24 ; j++)
         {
             [section addObject:[NSString stringWithFormat:@"Cell n°%i", j]];
         }
@@ -119,7 +119,15 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    return [self.headers objectAtIndex:section];
+    UIView *view = [self.headers objectAtIndex:section];
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:view.bounds];
+    label.text = [NSString stringWithFormat:@"Section: %ld", (long)section];
+    label.textAlignment = NSTextAlignmentCenter;
+    
+    [view addSubview:label];
+    
+    return view;
 }
 
 @end

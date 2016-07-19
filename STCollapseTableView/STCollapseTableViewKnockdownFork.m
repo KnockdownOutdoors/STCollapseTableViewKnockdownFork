@@ -126,7 +126,7 @@
 	return [super respondsToSelector:aSelector] || [self.collapseDataSource respondsToSelector:aSelector] || [self.collapseDelegate respondsToSelector:aSelector];
 }
 
--(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+-(void)changeCellAlphaForScrollView:(UIScrollView *)scrollView {
     
     NSUInteger sectionNumber = [[self indexPathForCell:[[self visibleCells] objectAtIndex: 0]] section];
     
@@ -172,6 +172,30 @@
         else
             cell.alpha = 1.0f;
     }
+    
+}
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    [self changeCellAlphaForScrollView:scrollView];
+    
+}
+
+-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    
+    [self changeCellAlphaForScrollView:scrollView];
+    
+}
+
+-(void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
+    
+    [self changeCellAlphaForScrollView:scrollView];
+    
+}
+
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    
+    [self changeCellAlphaForScrollView:scrollView];
     
 }
 
@@ -311,7 +335,14 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	return [self.collapseDataSource tableView:tableView cellForRowAtIndexPath:indexPath];
+    UITableViewCell *cell = [self.collapseDataSource tableView:tableView cellForRowAtIndexPath:indexPath];
+    UIView *view = [_sectionHeaders objectAtIndex:indexPath.section];
+    
+    if (cell.frame.origin.y < ((view.frame.origin.y + view.frame.size.height) / 2)) {
+        cell.alpha = 0.0f;
+    }
+    
+	return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
