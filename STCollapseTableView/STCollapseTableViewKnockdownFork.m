@@ -134,7 +134,7 @@
     
     float yPosition = (float)cellFrame.origin.y - ((float)headerFrame.origin.y + (float)headerFrame.size.height);
     if (yPosition < 0) {
-        float cellAlpha = 1.0f + (yPosition / (headerFrame.size.height));
+        float cellAlpha = 1.0f + (yPosition / (headerFrame.size.height * 0.5));
         cell.alpha = cellAlpha;
     }
     else
