@@ -128,8 +128,6 @@
 
 -(void)changeCellAlphaForScrollView:(UIScrollView *)scrollView {
     
-    NSUInteger sectionNumber = [[self indexPathForCell:[[self visibleCells] objectAtIndex: 0]] section];
-    
     if (_lastOffset < scrollView.contentOffset.y) {
         _lastOffset = scrollView.contentOffset.y;
         
@@ -144,6 +142,8 @@
         if (cell == nil) {
             return;
         }
+        
+        NSUInteger sectionNumber = [self indexPathForCell:cell].section;
         
         CGRect cellFrame = cell.frame;
         CGRect headerFrame = [_sectionHeaders objectAtIndex:sectionNumber].frame;
@@ -173,6 +173,8 @@
         if (cell == nil) {
             return;
         }
+        
+        NSUInteger sectionNumber = [self indexPathForCell:cell].section;
         
         CGRect cellFrame = cell.frame;
         CGRect headerFrame = [_sectionHeaders objectAtIndex:sectionNumber].frame;
