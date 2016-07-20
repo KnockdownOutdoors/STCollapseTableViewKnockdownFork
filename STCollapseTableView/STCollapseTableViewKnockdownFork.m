@@ -153,9 +153,9 @@ typedef enum : NSUInteger {
         NSUInteger sectionNumber = [self indexPathForCell:cell].section;
         
         CGRect cellFrame = cell.frame;
-        CGRect headerFrame = [_sectionHeaders objectAtIndex:sectionNumber].frame;
+        CGRect headerFrame = [_sectionHeaders objectAtIndex:0].frame;
         
-        float yPosition = (float)cellFrame.origin.y - ((float)headerFrame.origin.y + (float)headerFrame.size.height);
+        float yPosition = ((float)cellFrame.size.height * [self indexPathForCell:cell].row) - (scrollView.contentOffset.y - (headerFrame.size.height * (1+sectionNumber))) - ((float)headerFrame.size.height);
         if (yPosition < 0) {
             float cellAlpha = 1.0f + (yPosition / (headerFrame.size.height * 0.5));
             if (cellAlpha < 0) {
@@ -186,7 +186,7 @@ typedef enum : NSUInteger {
         CGRect cellFrame = cell.frame;
         CGRect headerFrame = [_sectionHeaders objectAtIndex:sectionNumber].frame;
         
-        float yPosition = (float)cellFrame.origin.y - ((float)headerFrame.origin.y + (float)headerFrame.size.height);
+        float yPosition = ((float)cellFrame.size.height * [self indexPathForCell:cell].row) - (scrollView.contentOffset.y - (headerFrame.size.height * (1+sectionNumber))) - ((float)headerFrame.size.height);
         if (yPosition < 0) {
             float cellAlpha = 1.0f + (yPosition / (headerFrame.size.height * 0.5));
             if (cellAlpha < 0) {
