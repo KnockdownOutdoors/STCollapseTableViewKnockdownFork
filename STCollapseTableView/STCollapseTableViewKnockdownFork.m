@@ -40,8 +40,15 @@
 @property (nonatomic, strong) NSMutableArray<UIView*> *sectionHeaders;
 
 @property(nonatomic) float lastOffset;
+@property(nonatomic) float velocity;
 
 @end
+
+typedef enum : NSUInteger {
+    ScrollViewSwipeUp,
+    ScrollViewSwipeDown,
+    ScrollViewSwipeUnknown,
+} ScrollViewSwipeDirection;
 
 @implementation STCollapseTableView
 
@@ -126,10 +133,10 @@
 	return [super respondsToSelector:aSelector] || [self.collapseDataSource respondsToSelector:aSelector] || [self.collapseDelegate respondsToSelector:aSelector];
 }
 
--(void)changeCellAlphaForScrollView:(UIScrollView *)scrollView {
+-(void)changeCellAlphaForScrollView:(UIScrollView *)scrollView withScrollDirection:(ScrollViewSwipeDirection)direction {
     
-    if (_lastOffset < scrollView.contentOffset.y) {
-        _lastOffset = scrollView.contentOffset.y;
+    if (direction == ScrollViewSwipeUp) {
+        //_lastOffset = scrollView.contentOffset.y;
         
         UITableViewCell *cell = nil;
         for (UITableViewCell *thisCell in [self visibleCells]) {
@@ -160,7 +167,7 @@
             cell.alpha = 1.0f;
     }
     else {
-        _lastOffset = scrollView.contentOffset.y;
+        //_lastOffset = scrollView.contentOffset.y;
         
         UITableViewCell *cell = nil;
         for (UITableViewCell *thisCell in [[self visibleCells] reverseObjectEnumerator]) {
@@ -195,25 +202,82 @@
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
-    [self changeCellAlphaForScrollView:scrollView];
+    if (_velocity > 0) {
+        [self changeCellAlphaForScrollView:scrollView withScrollDirection:ScrollViewSwipeUp];
+    }
+    else if (_velocity < 0) {
+        [self changeCellAlphaForScrollView:scrollView withScrollDirection:ScrollViewSwipeDown];
+    }
+    else if (_lastOffset < scrollView.contentOffset.y) {
+        [self changeCellAlphaForScrollView:scrollView withScrollDirection:ScrollViewSwipeUp];
+    }
+    else {
+        [self changeCellAlphaForScrollView:scrollView withScrollDirection:ScrollViewSwipeDown];
+    }
+    _lastOffset = scrollView.contentOffset.y;
     
 }
 
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     
-    [self changeCellAlphaForScrollView:scrollView];
+    if (_velocity > 0) {
+        [self changeCellAlphaForScrollView:scrollView withScrollDirection:ScrollViewSwipeUp];
+    }
+    else if (_velocity < 0) {
+        [self changeCellAlphaForScrollView:scrollView withScrollDirection:ScrollViewSwipeDown];
+    }
+    else if (_lastOffset < scrollView.contentOffset.y) {
+        [self changeCellAlphaForScrollView:scrollView withScrollDirection:ScrollViewSwipeUp];
+    }
+    else {
+        [self changeCellAlphaForScrollView:scrollView withScrollDirection:ScrollViewSwipeDown];
+    }
+    _lastOffset = scrollView.contentOffset.y;
     
 }
 
 -(void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
     
-    [self changeCellAlphaForScrollView:scrollView];
+    if (_velocity > 0) {
+        [self changeCellAlphaForScrollView:scrollView withScrollDirection:ScrollViewSwipeUp];
+    }
+    else if (_velocity < 0) {
+        [self changeCellAlphaForScrollView:scrollView withScrollDirection:ScrollViewSwipeDown];
+    }
+    else if (_lastOffset < scrollView.contentOffset.y) {
+        [self changeCellAlphaForScrollView:scrollView withScrollDirection:ScrollViewSwipeUp];
+    }
+    else {
+        [self changeCellAlphaForScrollView:scrollView withScrollDirection:ScrollViewSwipeDown];
+    }
+    _lastOffset = scrollView.contentOffset.y;
     
 }
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     
-    [self changeCellAlphaForScrollView:scrollView];
+    _velocity = 0;
+    if (_lastOffset < scrollView.contentOffset.y) {
+        [self changeCellAlphaForScrollView:scrollView withScrollDirection:ScrollViewSwipeUp];
+    }
+    else {
+        [self changeCellAlphaForScrollView:scrollView withScrollDirection:ScrollViewSwipeDown];
+    }
+    _lastOffset = scrollView.contentOffset.y;
+    
+}
+
+-(void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
+    
+    _lastOffset = targetContentOffset->y;
+    //[self changeCellAlphaForScrollView:scrollView];
+    _velocity = velocity.y;
+    if (_velocity > 0) {
+        [self changeCellAlphaForScrollView:scrollView withScrollDirection:ScrollViewSwipeUp];
+    }
+    else {
+        [self changeCellAlphaForScrollView:scrollView withScrollDirection:ScrollViewSwipeDown];
+    }
     
 }
 
