@@ -65,6 +65,13 @@
 @property (nonatomic, assign) BOOL shouldHandleHeadersTap;
 
 /**
+ *  This property allows STCollapseTableView to adjust the cell alpha as it scrolls under the header view.
+ *  If NO, the cell will be fully visible if the header has a clear background color.
+ *  Default value is NO.
+ */
+@property (nonatomic, assign) BOOL cellShouldDisappear;
+
+/**
  *	This method will display the section whose index is in parameters
  *  If exclusiveSections boolean is YES, this method will close any open section.
  *

@@ -87,6 +87,7 @@ typedef enum : NSUInteger {
 	self.exclusiveSections = YES;
     self.shouldHandleHeadersTap = YES;
 	self.sectionsStates = [[NSMutableArray alloc] init];
+    self.cellShouldDisappear = NO;
 }
 
 - (void)setDataSource:(id <UITableViewDataSource>)newDataSource
@@ -135,6 +136,9 @@ typedef enum : NSUInteger {
 
 -(void)changeCellAlphaForScrollView:(UIScrollView *)scrollView withScrollDirection:(ScrollViewSwipeDirection)direction {
     
+    if (!_cellShouldDisappear) {
+        return;
+    }
     if (direction == ScrollViewSwipeUp) {
         //_lastOffset = scrollView.contentOffset.y;
         
