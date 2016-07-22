@@ -75,6 +75,7 @@
     [super viewDidLoad];
     
     [self.tableView reloadData];
+    _tableView.cellShouldDisappear = YES;
     [self.tableView openSection:0 animated:NO];
 }
 

@@ -422,11 +422,11 @@ typedef enum : NSUInteger {
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [self.collapseDataSource tableView:tableView cellForRowAtIndexPath:indexPath];
-    UIView *view = [_sectionHeaders objectAtIndex:indexPath.section];
+    //UIView *view = [_sectionHeaders objectAtIndex:indexPath.section];
     
-    if (cell.frame.origin.y < ((view.frame.origin.y + view.frame.size.height) / 2)) {
-        cell.alpha = 0.0f;
-    }
+    //if (cell.frame.origin.y < ((view.frame.origin.y + view.frame.size.height) / 2)) {
+    //    cell.alpha = 0.0f;
+    //}
     
 	return cell;
 }
