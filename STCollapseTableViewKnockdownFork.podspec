@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "STCollapseTableViewKnockdownFork"
-  s.version      = "0.1.1"
+  s.version      = "0.1.2"
   s.summary      = "A UITableView subclass that automatically collapse and/or expand your sections"
 
   # This description is used to generate tags and improve search results.

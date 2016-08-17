@@ -10,7 +10,7 @@
 
 #import "STCollapseTableViewKnockdownFork.h"
 
-@interface ViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface ViewController () <UITableViewDataSource, STCollapseTableViewKnockdownForkDelegate>
 
 @property (weak, nonatomic) IBOutlet STCollapseTableView *tableView;
 
@@ -84,6 +84,10 @@
     [self.tableView setExclusiveSections:!self.tableView.exclusiveSections];
     
     [button setTitle:self.tableView.exclusiveSections?@"exclusive":@"!exclusive" forState:UIControlStateNormal];
+}
+
+-(void)scrollViewScrolled:(UIScrollView *)scrollView {
+    NSLog(@"scrolled");
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

@@ -220,6 +220,9 @@ typedef enum : NSUInteger {
     }
     _lastOffset = scrollView.contentOffset.y;
     
+    if ([self.delegate respondsToSelector:@selector(scrollViewScrolled:)]) {
+        [self.delegate scrollViewScrolled:scrollView];
+    }
 }
 
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {

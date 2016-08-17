@@ -34,6 +34,7 @@
 
 @optional
 -(void)willToggleSection:(NSInteger)section;
+-(void)scrollViewScrolled:(UIScrollView *)scrollView;
 
 @end
 /**
@@ -104,5 +105,6 @@
  *	@return	YES if the section is open.
  */
 - (BOOL)isOpenSection:(NSUInteger)sectionIndex;
+
 
 @end
